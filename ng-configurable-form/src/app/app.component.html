@@ -8,80 +8,24 @@
     <form>
       <div class="survey-question mode-question">
         <p class="question-text">What is your preferred way to listen to music?</p>
-        <div class="radio-group">
-          <input id="mode-streaming" type="radio" name="primary-listen-mode">
-          <label for="mode-streaming">Streaming</label>
-        </div>
-        <div class="radio-group">
-          <input id="mode-physical" type="radio" name="primary-listen-mode">
-          <label for="mode-physical">Physical Media (vinyl, CDs, etc.)</label>
-        </div>
-        <div class="radio-group">
-          <input id="mode-file" type="radio" name="primary-listen-mode">
-          <label for="mode-file">Digital File (MP3, FLACC, etc.)</label>
-        </div>
-        <div class="radio-group">
-          <input id="mode-other" type="radio" name="primary-listen-mode">
-          <label for="mode-other">Other</label>
+        <div class="radio-group" *ngFor="let type of streamingTypes">
+          <input id="{{ type.id }}" type="radio" name="primary-listen-mode">
+          <label for="{{ type.id }}">{{ type.label }}</label>
         </div>
       </div>
       <div class="survey-question">
         <p class="question-text">What is your preferred music streaming service?</p>
-        <label for="streaming-select"></label>
         <select name="streaming-select" id="streaming-select">
-          <option value="Spotify">Spotify</option>
-          <option value="Tidal">Tidal</option>
-          <option value="Apple Music">Apple Music</option>
-          <option value="You Tube Music">You Tube Music</option>
-          <option value="Pandora">Pandora</option>
-          <option value="Deezer">Deezer</option>
-          <option value="Amazon Music">Amazon Music</option>
-          <option value="Qobuz">Qobuz</option>
-          <option value="Other">Other</option>
-          <option value="None">None</option>
+          <option value="{{ service.value }}" *ngFor="let service of streamingServices">
+            {{ service.name }}
+          </option>
         </select>
       </div>
       <div class="survey-question">
         <p class="question-text">Which genres do listen to primarily? (Check all that apply)</p>
-        <div class="checkbox-group">
-          <input id="hip-hop" type="checkbox">
-          <label for="hip-hop">Hip Hop</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="rock" type="checkbox">
-          <label for="rock">Rock</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="jazz" type="checkbox">
-          <label for="jazz">Jazz</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="electronic" type="checkbox">
-          <label for="electronic">Electronic</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="rnb" type="checkbox">
-          <label for="rnb">R n' B</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="soul" type="checkbox">
-          <label for="soul">Soul</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="country" type="checkbox">
-          <label for="country">Country</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="folk" type="checkbox">
-          <label for="folk">Folk</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="indie" type="checkbox">
-          <label for="indie">Indie</label>
-        </div>
-        <div class="checkbox-group">
-          <input id="other" type="checkbox">
-          <label for="other">Other</label>
+        <div class="checkbox-group" *ngFor="let genre of musicGenres">
+          <input id="{{ genre.id }}" type="checkbox">
+          <label for="{{ genre.id }}">{{ genre.label }}</label>
         </div>
       </div>
       <div class="survey-question">
@@ -90,7 +34,6 @@
       </div>
       <div class="survey-question">
         <p class="question-text">What is your ZIP/postal code?</p>
-        <label for="zip-code"></label>
         <input id="zip-code" type="text">
       </div>
     </form>
