@@ -5,18 +5,18 @@
     </h1>
   </div>
   <div class="form-container">
-    <form>
-      <div class="survey-question mode-question">
+    <form [formGroup]="musicSurveyForm">
+      <div class="survey-question">
         <p class="question-text">What is your preferred way to listen to music?</p>
         <div class="radio-group" *ngFor="let type of streamingTypes">
-          <input id="{{ type.id }}" type="radio" name="primary-listen-mode">
+          <input id="{{ type.id }}" type="radio" value="{{ type.label }}" [formControlName]="'musicFormatResponse'">
           <label for="{{ type.id }}">{{ type.label }}</label>
         </div>
       </div>
       <div class="survey-question">
         <p class="question-text">What is your preferred music streaming service?</p>
-        <select name="streaming-select" id="streaming-select">
-          <option value="{{ service.value }}" *ngFor="let service of streamingServices">
+        <select name="streaming-select" id="streaming-select" [formControlName]="'streamingServiceResponse'">
+          <option  *ngFor="let service of musicFormats" [ngValue]="service.value">
             {{ service.name }}
           </option>
         </select>
@@ -24,17 +24,20 @@
       <div class="survey-question">
         <p class="question-text">Which genres do listen to primarily? (Check all that apply)</p>
         <div class="checkbox-group" *ngFor="let genre of musicGenres">
-          <input id="{{ genre.id }}" type="checkbox">
+          <input id="{{ genre.id }}" type="checkbox" (change)="onCheckboxSelect(genre.id)">
           <label for="{{ genre.id }}">{{ genre.label }}</label>
         </div>
       </div>
       <div class="survey-question">
         <p class="question-text">How many times a year do you attend a live music event?</p>
-        <input type="number">
+        <input type="number" [formControlName]="'liveMusicEventResponse'">
       </div>
       <div class="survey-question">
         <p class="question-text">What is your ZIP/postal code?</p>
-        <input id="zip-code" type="text">
+        <input id="zip-code" type="text" [formControlName]="'postalCodeResponse'">
+      </div>
+      <div class="submit-button-container">
+        <button type="submit" (click)="onFormSubmit($event)">Submit your response</button>
       </div>
     </form>
   </div>

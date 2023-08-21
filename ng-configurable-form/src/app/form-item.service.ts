@@ -6,7 +6,7 @@ import { InputList, SelectOptionList } from './interfaces';
   providedIn: 'root'
 })
 export class FormItemService {
-  private streamingTypes: InputList[] = [
+  private musicFormats: InputList[] = [
     { id: 'mode-streaming', label: 'Streaming' },
     { id: 'mode-physical', label: 'Physical Media (vinyl, CDs, etc.' },
     { id: 'mode-file', label: 'Digital Files (MP3s, FLACC, etc.' },
@@ -39,16 +39,16 @@ export class FormItemService {
     { id: 'other', label: 'Other' },
   ]
 
-  private streamingTypeSubject = new BehaviorSubject(this.streamingTypes);
-  private streamingServiceSubject = new BehaviorSubject(this.streamingServices);
+  private streamingTypeSubject = new BehaviorSubject(this.musicFormats);
+  private musicFormatSubject = new BehaviorSubject(this.streamingServices);
   private musicGenreSubject = new BehaviorSubject(this.musicGenres);
 
   get $streamingTypes() {
     return this.streamingTypeSubject.asObservable();
   }
 
-  get $streamingServices() {
-    return this.streamingServiceSubject.asObservable();
+  get $musicFormats() {
+    return this.musicFormatSubject.asObservable();
   }
 
   get $musicGenres() {
